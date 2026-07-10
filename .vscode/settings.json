@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "/home/codespace/.python/current/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.testing.unittestEnabled": true,
+  "python.testing.pytestEnabled": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  }
+}

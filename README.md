@@ -1,41 +1,24 @@
 # Project
 
-This repository contains a small Flask browser project plus a helper script for running a remote Chromium session.
+This repository contains a helper script for running a remote Chromium session.
 
 ## Setup
 
-1. Create and activate a virtual environment.
-2. Install the Python dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. On Linux, install the Playwright system libraries:
-
-```bash
-python -m playwright install-deps chromium
-```
-
-4. Install the Playwright browser binary used by the app:
-
-```bash
-python -m playwright install chromium
-```
+1. Start the remote browser helper.
 
 ## Run
 
-Start the app locally with:
+In Codespaces, run the remote browser helper:
 
 ```bash
-python test.py
+bash scripts/launch_remote_browser.sh
 ```
 
-Run the tests with:
+The port you want is:
 
-```bash
-python -m unittest
-```
+1. `6080` for the remote browser / noVNC session.
+
+If you are using VS Code, run the task named `Start browser environment` from the Command Palette or the Run Task menu.
 
 ## VS Code
 
@@ -43,4 +26,16 @@ Recommended extensions are listed in `.vscode/extensions.json`.
 
 ## Remote browser helper
 
-The script in `scripts/launch_remote_browser.sh` expects a working Chromium binary plus system tools such as `Xvfb`, `x11vnc`, `websockify`, and noVNC to be available on the machine.
+The script in `scripts/launch_remote_browser.sh` prefers a real Google Chrome install first, then falls back to Chromium, plus system tools such as `Xvfb`, `x11vnc`, `websockify`, and noVNC.
+
+## Downloads and file transfer
+
+Files downloaded from the remote browser should go into the workspace `downloads/` folder. That keeps large files out of the repo while making them persistent across Codespaces reconnects.
+
+Suggested flow:
+
+1. Download the file in Chrome.
+2. Move or save it into `downloads/` if it is not already there.
+3. Transfer it out of the codespace with a direct download, `gh codespace cp`, or an external sync tool like `rclone` if you want Google Drive support.
+
+For very large files, avoid putting them in git. Use the `downloads/` folder as the handoff point instead.
